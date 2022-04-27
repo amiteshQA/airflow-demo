@@ -6,14 +6,14 @@ dag_populate_csv:
     retry_delay_sec: 60
     start_date: 2022-04-27
   default_view: "tree"
-  description: "This is the test description of newly created file"
+  description: "This is the new test description"
   on_failure_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
   on_failure_callback_name: on_failure_teams
   on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
   on_success_callback_name: on_success_teams
   orientation: "LR"
-  schedule_interval: "@weekly"
+  schedule_interval: "@daily"
   tasks:
     task_export_csv:
-      bash_command: "python -m apps.testing --notify=true"
+      bash_command: "python -m apps.generate_csv --notify=true"
       operator: airflow.operators.bash_operator.BashOperator
