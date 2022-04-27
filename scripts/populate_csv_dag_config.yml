@@ -7,8 +7,6 @@ dag_populate_csv:
     start_date: 2022-04-27
   default_view: "tree"
   description: "This is the new test description"
-  on_failure_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
-  on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
   orientation: "LR"
   schedule_interval: "@daily"
   tasks:
