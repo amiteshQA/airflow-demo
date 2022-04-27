@@ -1,6 +1,6 @@
 dag_populate_csv:
   default_args:
-    end_date: 2022-04-30
+    end_date: 2022-10-30
     owner: "data_pipleline_oh"
     retries: 1
     retry_delay_sec: 60
@@ -8,12 +8,10 @@ dag_populate_csv:
   default_view: "tree"
   description: "This is the new test description"
   on_failure_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
-  on_failure_callback_name: on_failure_teams
   on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
-  on_success_callback_name: on_success_teams
   orientation: "LR"
   schedule_interval: "@daily"
   tasks:
     task_export_csv:
-      bash_command: "python -m apps.generate_csv --notify=true"
+      bash_command: "cd /home/airflow/gcs/apps/; python -m apps.generate_csv"
       operator: airflow.operators.bash_operator.BashOperator

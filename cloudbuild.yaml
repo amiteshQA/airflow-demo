@@ -15,3 +15,11 @@ steps:
     - '-r'
     - 'scripts'
     - 'gs://${_GCS_BUCKET}/scripts'
+- name: gcr.io/cloud-builders/gsutil
+  args:
+    - '-m'
+    - 'rsync'
+    - '-d'
+    - '-r'
+    - 'apps'
+    - 'gs://${_GCS_BUCKET}/apps'
