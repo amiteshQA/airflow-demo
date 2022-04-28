@@ -6,7 +6,7 @@ dag_populate_csv:
     retry_delay_sec: 60
     start_date: 2022-05-05
   default_view: "tree"
-  description: "This is a test"
+  description: "local testing"
   on_failure_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
   on_failure_callback_name: on_failure_teams
   on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
