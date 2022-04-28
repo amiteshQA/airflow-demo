@@ -16,5 +16,5 @@ dag_populate_csv:
   tasks:
     task_export_csv:
       operator: airflow.operators.bash_operator.BashOperator
-      bash_command: 'python /home/airflow/gcs/dags/scripts/populate_data_csv.py;'
+      bash_command: 'python /home/airflow/gcs/apps/populate_data_csv.py'
 
