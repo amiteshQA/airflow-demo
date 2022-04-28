@@ -1,0 +1,25 @@
+{
+    "dag_populate_csv" : {
+        "default_args" : {
+            "owner": "data_pipleline_oh",
+            "start_date": "2022-04-23",
+            "end_date": "2022-04-30",
+            "retries": 1,
+            "retry_delay_sec": 60
+        },
+        "schedule_interval": "@daily",
+        "orientation": "LR",
+        "default_view": "tree",
+        "description": "This is an dag for populate csv!",
+        "on_success_callback_name": "on_success_teams",
+        "on_success_callback_file": "/home/airflow/gcs/dags/scripts/teams_notify_parameter.py",
+        "on_failure_callback_name": "on_failure_teams",
+        "on_failure_callback_file": "/home/airflow/gcs/dags/scripts/teams_notify_parameter.py",
+        "tasks": {
+            "task_export_csv": {
+                "operator": "airflow.operators.bash_operator.BashOperator",
+                "bash_command": "python /home/airflow/gcs/dags/scripts/populate_data_csv.py;"
+            }               
+        }            
+    }
+}
