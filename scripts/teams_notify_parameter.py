@@ -12,12 +12,14 @@ BOT_ACCESS_TOKEN = 'NjkzZWYyMTYtZGVlMS00OGJjLTkyNDAtYTY5MDgwYzRiZmFiZjY0NjJjNzEt
 # Room_id = 'Y2lzY29zcGFyazovL3VzL1JPT00vMzJiYzM5OTAtMGFmZS0xMWVjLTliYjUtN2ZhNTY0Zjg5NGJi'
 
 def on_success_teams(context):
+    print('_________From the on_success_teams_notification___________')
     airflow_room_id = 'Y2lzY29zcGFyazovL3VzL1JPT00vN2RjNjA1YjAtYzE2NS0xMWVjLWE2MjItMWJkZDc5NmE0ZjFh'
     dag_info = 'Dag Completion Notify'
     on_success_task(context, airflow_room_id, dag_info)
 
 
 def on_failure_teams(context):
+    print('_________From the on_failure_teams_notification___________')
     airflow_room_id = 'Y2lzY29zcGFyazovL3VzL1JPT00vN2RjNjA1YjAtYzE2NS0xMWVjLWE2MjItMWJkZDc5NmE0ZjFh'
     dag_info = 'Dag Failure Notify'
     on_failed_task(context, airflow_room_id, dag_info)
@@ -78,6 +80,7 @@ def on_success_task(context, room_id, dag_info):
 
 
 def send_message(message, room_id, message_type='text', files=None):
+    print('_________Send_message___________')
     api = WebexTeamsAPI(access_token=BOT_ACCESS_TOKEN)
     success, reason = _send_message(api, message_type, room_id, message, files)
     if success is False:
@@ -85,6 +88,7 @@ def send_message(message, room_id, message_type='text', files=None):
 
 
 def _send_message(api, message_type, room_id, message, files, attempts=0):
+    print('_________from _Send_message___________')
     data = {
         'roomId': room_id,
         message_type: message,
