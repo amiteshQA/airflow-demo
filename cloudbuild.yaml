@@ -14,7 +14,7 @@ steps:
     - '-d'
     - '-r'
     - 'scripts'
-    - 'gs://${_GCS_BUCKET}/scripts'
+    - 'gs://${_GCS_BUCKET}/dags/scripts'
 - name: gcr.io/cloud-builders/gsutil
   args:
     - '-m'
