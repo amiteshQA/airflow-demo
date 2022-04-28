@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: -ms-flexbox;
+            /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap;
+            /* IE10 */
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+
+        .col-25 {
+            -ms-flex: 25%;
+            /* IE10 */
+            flex: 25%;
+        }
+
+        .col-50 {
+            -ms-flex: 50%;
+            /* IE10 */
+            flex: 50%;
+        }
+
+        .col-75 {
+            -ms-flex: 75%;
+            /* IE10 */
+            flex: 75%;
+        }
+
+        .col-25,
+        .col-50,
+        .col-75 {
+            padding: 0 16px;
+        }
+
+        .container {
+            background-color: #f2f2f2;
+            padding: 5px 20px 15px 20px;
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .icon-container {
+            margin-bottom: 20px;
+            padding: 7px 0;
+            font-size: 24px;
+        }
+
+        .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            width: 100%;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #2196F3;
+        }
+
+        hr {
+            border: 1px solid lightgrey;
+        }
+
+        span.price {
+            float: right;
+            color: grey;
+        }
+
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+        @media (max-width: 800px) {
+            .row {
+                flex-direction: column-reverse;
+            }
+
+            .col-25 {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function pushFiles() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:5000/pushFiles",
+                success: function(data){
+                    console.log(data);
+                    alert('Files been pushed successfully')
+                },
+                error: function(errMsg) {
+                    console.error(errMsg);
+                }
+            });
+        }
+
+        function submitform() {
+            var description = $('#description').val();
+            var schedule = $('#schedule').val();
+            var start_date = $('#start_date').val();
+            var end_date = $('#end_date').val();
+            var command = $('#command').val();
+
+            var finalData = {
+                description, schedule, start_date, end_date, command
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:5000/dag_parameters",
+                data: JSON.stringify(finalData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){
+                    console.log(data);
+                    alert(data?.message)
+                },
+                error: function(errMsg) {
+                    console.error(errMsg);
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <h2>Airflow DAG Form</h2>
+    <!-- <p>Resize the browser window to see the effect. When the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other.</p> -->
+    <div class="row">
+        <div class="col-75">
+            <div class="container">
+                <div action="#" id="myForm">
+
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>DAG Details </h3>
+                            <label for="fname"> Description</label>
+                            <input type="text" id="description" name="description" placeholder="Description">
+                            <label for="email"> Schedule interval</label>
+                            <input type="text" id="schedule" name="email" placeholder="@daily/@weekly/30 6 * * *">
+
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="state">Start Date</label>
+                                    <input type="text" id="start_date" name="state" placeholder="YYYY-MM-DD">
+                                </div>
+                                <div class="col-50">
+                                    <label for="zip">End Date</label>
+                                    <input type="text" id="end_date" name="zip" placeholder="YYYY-MM-DD">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-50" style="margin-top: 3%;">
+                            <h3> </h3>
+                            <label for="cname">Bash Command</label>
+                            <input type="text" id="command" name="cardname" placeholder="Command">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-50">
+                            <input type="submit" style="text-align:center;" value="Create DAG" class="btn"
+                                onclick="submitform()">
+                        </div>
+                        <div class="col-50">
+                            <input type="submit" style="text-align:center;" value="Push File" class="btn"
+                                onclick="pushFiles()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-25">
+        </div>
+    </div>
+
+</body>
+
+</html>
