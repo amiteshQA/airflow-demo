@@ -10,9 +10,9 @@ dag_populate_csv:
   schedule_interval: '@daily'
   catchp: False
   on_success_callback_name: on_success_teams
-  on_success_callback_file:
+  on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
   on_failure_callback_name: on_failure_teams
-  on_failure_callback_file:
+  on_failure_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
   tasks:
     task_export_csv:
       operator: airflow.operators.bash_operator.BashOperator
