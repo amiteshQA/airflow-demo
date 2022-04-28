@@ -8,6 +8,7 @@ SYMBOLS = {
 }
 BOT_ACCESS_TOKEN = 'NjkzZWYyMTYtZGVlMS00OGJjLTkyNDAtYTY5MDgwYzRiZmFiZjY0NjJjNzEtZWYw_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f'
 
+
 # Room_id = 'Y2lzY29zcGFyazovL3VzL1JPT00vMzJiYzM5OTAtMGFmZS0xMWVjLTliYjUtN2ZhNTY0Zjg5NGJi'
 
 def on_success_teams(context):
@@ -15,25 +16,26 @@ def on_success_teams(context):
     dag_info = 'Dag Completion Notify'
     on_success_task(context, airflow_room_id, dag_info)
 
+
 def on_failure_teams(context):
     airflow_room_id = 'Y2lzY29zcGFyazovL3VzL1JPT00vN2RjNjA1YjAtYzE2NS0xMWVjLWE2MjItMWJkZDc5NmE0ZjFh'
     dag_info = 'Dag Failure Notify'
     on_failed_task(context, airflow_room_id, dag_info)
 
+
 def on_success_eloqua(context):
     eloqua_room_id = 'Y2lzY29zcGFyazovL3VzL1JPT00vMzJiYzM5OTAtMGFmZS0xMWVjLTliYjUtN2ZhNTY0Zjg5NGJi'
     dag_info = 'Eloqua Testing'
-    on_success_task(context, eloqua_room_id,dag_info)
+    on_success_task(context, eloqua_room_id, dag_info)
 
 
 def on_failed_eloqua(context):
-
     eloqua_room_id = 'Y2lzY29zcGFyazovL3VzL1JPT00vMzJiYzM5OTAtMGFmZS0xMWVjLTliYjUtN2ZhNTY0Zjg5NGJi'
     dag_info = 'Eloqua Testing'
-    on_failed_task(context, eloqua_room_id,dag_info)
+    on_failed_task(context, eloqua_room_id, dag_info)
 
 
-def on_failed_task(context, room_id,dag_info):
+def on_failed_task(context, room_id, dag_info):
     message = None
     message = '''
                 {symbol} Task Failed. 
@@ -54,7 +56,7 @@ def on_failed_task(context, room_id,dag_info):
     send_message(message, room_id, message_type='markdown')
 
 
-def on_success_task(context, room_id,dag_info):
+def on_success_task(context, room_id, dag_info):
     message = None
     message = '''
                 {symbol} Task Completed. 
@@ -96,6 +98,6 @@ def _send_message(api, message_type, room_id, message, files, attempts=0):
         return True, None
     except Exception as err:
         if attempts == 0:
-            return _send_message(api,room_id,message_type, message, files, attempts + 1)
+            return _send_message(api, room_id, message_type, message, files, attempts + 1)
         else:
             return False, str(err)

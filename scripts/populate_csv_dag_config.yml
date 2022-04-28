@@ -1,20 +1,9 @@
 dag_populate_csv:
   default_args:
-    end_date: 2022-05-02
+    end_date: 2022-05-21
     owner: "data_pipleline_oh"
     retries: 1
     retry_delay_sec: 60
-<<<<<<< HEAD
-  description: 'this is an dag for populate csv!'
-  default_view: 'tree'  # or 'graph', 'duration', 'gantt', 'landing_times'
-  orientation: 'LR'  # or 'TB', 'RL', 'BT'
-  schedule_interval: '@daily'
-  catchp: False
-  on_success_callback_name: on_success_teams
-  on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
-  on_failure_callback_name: on_failure_teams
-  on_failure_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
-=======
     start_date: 2022-04-28
   default_view: "tree"
   description: "My new template to test git operation without sleep"
@@ -24,7 +13,6 @@ dag_populate_csv:
   on_success_callback_name: on_success_teams
   orientation: "LR"
   schedule_interval: "30 6 * * *"
->>>>>>> 53625cd7fcf76e3b89eac425b5a4ed8d6c5e4292
   tasks:
     task_export_csv:
       bash_command: "cd /home/airflow/gcs/dags/; python -m apps.populate_data_csv"
