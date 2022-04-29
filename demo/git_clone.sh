@@ -3,6 +3,7 @@
 cd C:/My_space/Personal-cloud-repo/airflow-demo
 
 git stash
+sleep 1
 echo "_________Taking the latest pull from main___________"
 git pull origin main
 sleep 2
