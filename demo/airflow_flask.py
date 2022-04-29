@@ -38,7 +38,7 @@ def create_yml():
     input_json = request.get_json(force=True)
 
     # Opening JSON file
-    with open('populate_csv.json') as file:
+    with open(r'C:\My_space\Personal-cloud-repo\airflow-demo\demo\populate_csv.json') as file:
         data = json.load(file)
 
         start_date = input_json['start_date']
