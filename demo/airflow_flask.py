@@ -93,7 +93,8 @@ def create_dag_factory(yml_file):
 def push_changes():
     os.chdir(r"C:\My_space\Personal-cloud-repo\airflow-demo\demo")
     print(os.getcwd())
-    return subprocess.Popen(r'bash git_clone.sh', shell=True, stdout=subprocess.PIPE).stdout.read()
+    # return subprocess.Popen(r'bash git_clone.sh', shell=True, stdout=subprocess.PIPE).stdout.read()
+    return subprocess.run("bash git_clone.sh", shell=True).stdout.read()
 
 
 if __name__ == "__main__":
