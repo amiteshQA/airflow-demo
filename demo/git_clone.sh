@@ -4,11 +4,13 @@
 cd C:/My_space/Personal-cloud-repo/airflow-demo
 
 git stash
+echo "_________Stashing the changes___________"
 #sleep 2
 echo "_________Taking the latest pull from main___________"
 git pull origin main
 #sleep 3
 git stash apply
+echo "_________applying the stash___________"
 #sleep 2
 echo "_________Adding files to git___________"
 git add .
