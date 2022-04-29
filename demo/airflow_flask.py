@@ -95,6 +95,7 @@ def push_changes():
     print(os.getcwd())
     # return subprocess.Popen(r'bash git_clone.sh', shell=True, stdout=subprocess.PIPE).stdout.read()
     subprocess.run("bash git_clone.sh", shell=True)
+    return jsonify({'message': 'YAML & Dag Factory file has been pushed successfully'})
 
 
 if __name__ == "__main__":

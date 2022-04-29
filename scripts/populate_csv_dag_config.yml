@@ -12,7 +12,7 @@ dag_populate_csv:
   on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
   on_success_callback_name: on_success_teams
   orientation: "LR"
-  schedule_interval: "@daily"
+  schedule_interval: "30 6 * * *"
   tasks:
     task_export_csv:
       bash_command: "cd /home/airflow/gcs/dags/; python -m apps.populate_data_csv"
