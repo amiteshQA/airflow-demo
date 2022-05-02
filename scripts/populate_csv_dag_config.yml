@@ -1,0 +1,19 @@
+dag_populate_csv:
+  default_args:
+    end_date: 2022-05-05
+    owner: "data_pipleline_oh"
+    retries: 1
+    retry_delay_sec: 60
+    start_date: 2022-05-01
+  default_view: "tree"
+  description: "Hackathon"
+  on_failure_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
+  on_failure_callback_name: on_failure_teams
+  on_success_callback_file: /home/airflow/gcs/dags/scripts/teams_notify_parameter.py
+  on_success_callback_name: on_success_teams
+  orientation: "LR"
+  schedule_interval: "@daily"
+  tasks:
+    task_export_csv:
+      bash_command: "cd /home/airflow/gcs/dags/; python -m apps.populate_data_csv"
+      operator: airflow.operators.bash_operator.BashOperator
